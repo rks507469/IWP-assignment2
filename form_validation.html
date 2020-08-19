@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
+        }
+
+
+        .title {
+            font-weight: 300;
+            text-align: center;
+            margin-top: 4%;
+            font-size: 1.2rem;
+        }
+
+        ::placeholder {
+            color: rgb(156, 156, 156);
+            font-weight: 300;
+        }
+
+        span {
+            font-weight: 700;
+            color: rgb(43, 139, 230);
+        }
+
+        form {
+            border: 1px solid rgb(139, 139, 139);
+            width: 30%;
+            margin: 4% auto;
+            padding: 3%;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            background: #f6f6f6;
+        }
+
+        form p {
+            font-weight: 300;
+            text-align: center;
+            font-size: 0.8rem;
+            margin: 2% 0;
+            display: inline-block;
+            color: rgb(99, 99, 99);
+        }
+
+        input[type=text],
+        input[type=password],
+        input[type=email] {
+
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+            -o-border-radius: 2px;
+            padding: 4%;
+            width: 70%;
+            outline: none;
+        }
+
+        input[checkbox] {
+            display: inline-block;
+            padding: -2px 0;
+        }
+
+        form div {
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        button {
+            margin: 0 auto;
+            font-size: 0.8rem;
+            overflow: hidden;
+            padding: 4%;
+            outline: none;
+            border: none;
+            color: #fff;
+            width: 40%;
+            border-radius: 40px;
+            -webkit-border-radius: 40px;
+            -moz-border-radius: 40px;
+            -ms-border-radius: 40px;
+            -o-border-radius: 40px;
+            background-color: rgb(43, 139, 230);
+        }
+
+        button:hover {
+            background-color: rgb(30, 123, 209);
+        }
+
+        .error {
+            border: 0.5px solid rgb(238, 75, 64);
+        }
+
+        .correct {
+            border: 0.5px solid rgb(54, 148, 235);
+        }
+
+        /* media queries*/
+
+        @media (max-width: 1200px) {
+            form {
+                width: 33%;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            form {
+                width: 35%;
+            }
+        }
+
+        @media (max-width:767px) {
+            form {
+                width: 40%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            form {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 450px) {
+            form {
+                width: 65%;
+            }
+        }
+    </style>
+    <title>Validation form</title>
+</head>
+
+<body>
+    <p class="title">Create your <span>Account</span></p>
+
+    <form>
+        <div>
+            <input type="text" name="name" id="name" placeholder="Username" required />
+            <p class="message1"></p>
+        </div>
+
+        <div>
+            <input type="email" name="email" id="email" placeholder="Email Address" required />
+            <p class="message2"></p>
+        </div>
+
+        <div>
+            <input type="password" name="password" id="password" placeholder="Create a password" required />
+            <p class="message3"></p>
+        </div>
+
+        <div>
+            <input type="password" name="password-confirm" id="password-confirm" placeholder="Confirm your password"
+                required />
+            <p class="message4"></p>
+        </div>
+
+        <div>
+            <p class="accept">Accept <a href="#">Terms and Conditions</a></p>
+            <input type="checkbox" class="checkbox" required />
+        </div>
+
+        <div><button type="submit">Sign up</button></div>
+    </form>
+
+    <script type="text/javascript">
+        let name = document.querySelector("#name");
+        let email = document.querySelector("#email");
+        let pw = document.querySelector("#password");
+        let pwConfirm = document.querySelector("#password-confirm");
+        let button = document.querySelector("button");
+        let placeholder = document.querySelectorAll("placeholder");
+        let checkbox = document.querySelector(".checkbox");
+        let accept = document.querySelector(".accept");
+        let a = document.querySelector("a");
+        let message1 = document.querySelector(".message1");
+        let message2 = document.querySelector(".message2");
+        let message3 = document.querySelector(".message3");
+        let message4 = document.querySelector(".message4");
+
+        //check if inputs are empty/not valid and if so trigger error message
+        const checkSubmissions = function () {
+            if (name.value.length < 5) {
+                message1.innerText = "Your username must be at least 5 characters";
+                name.classList.add("error");
+                return false;
+            }
+
+            if (name.value === "" || name.value == null) {
+                message1.innerText = "Enter your username";
+                name.classList.add("error");
+                return false;
+            }
+
+            let emailValue = email.value;
+            let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!pattern.test(emailValue)) {
+                email.classList.add("error");
+                message2.innerText = "Enter valid email address";
+                return false;
+            }
+            if (pw.value.length < 6) {
+                message3.innerText = "Password needs to be 6 characters";
+                pw.classList.add("error");
+                return false;
+            }
+            if (pw.value != pwConfirm.value) {
+                message4.innerText = "Passwords don't match";
+                pwConfirm.classList.add("error");
+                return false;
+            }
+            if (checkbox.checked == false) {
+                accept.style.color = "rgb(234, 75, 64)";
+                a.style.color = "rgb(234, 75, 64)";
+                return false;
+            } else {
+                alert("Welcome " + name.value + ", thanks for signing up!");
+                return true;
+            }
+        };
+
+        // change input border color if input's value is valid
+
+        const checkName = function () {
+            if (name.value.length < 5) {
+                name.classList.add("error");
+                name.classList.remove("correct");
+            } else name.classList.add("correct");
+        };
+
+        const checkEmail = function () {
+            let emailValue = email.value;
+            let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!pattern.test(emailValue)) {
+                email.classList.add("error");
+                email.classList.remove("correct");
+            } else {
+                email.classList.add("correct");
+            }
+        };
+
+        const checkPW = function () {
+            if (pw.value.length < 6) {
+                pw.classList.add("error");
+                pw.classList.remove("correct");
+            } else {
+                pw.classList.add("correct");
+            }
+        };
+
+        const checkMatch = function () {
+            if (pw.value != pwConfirm.value) {
+                pwConfirm.classList.add("error");
+                pwConfirm.classList.remove("correct");
+            } else {
+                pwConfirm.classList.add("correct");
+            }
+        };
+
+        const checkboxIschecked = function () {
+            if (checkbox.checked == true) {
+                accept.style.color = "rgb(99, 99, 99)";
+                a.style.color = "#000";
+            }
+        };
+
+        checkbox.addEventListener("click", checkboxIschecked);
+        pwConfirm.addEventListener("keyup", checkMatch);
+        pw.addEventListener("keyup", checkPW);
+        email.addEventListener("keyup", checkEmail);
+        name.addEventListener("keyup", checkName);
+        button.addEventListener("click", checkSubmissions);
+        button.addEventListener("click", function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
