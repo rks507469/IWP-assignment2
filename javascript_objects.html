@@ -6,6 +6,7 @@
     <title>Javascript Objects</title>
 </head>
 <body>
+    <h2>Please see the Console for the answers</h2>
     <script type="text/javascript">
         const regex = /[A-Z]/g;
         
@@ -14,7 +15,7 @@
         const string2 = 'This is also a String';
         const string3 = `This is another assignment`;
         const string4 = new String("A String object");
-        colsole.log(string1.charAt(0));
+        console.log(string1.charAt(0));
         console.log(string1.concat('. ', string2));
         console.log(string1.substr(1,4));
         console.log(string1.slice(5));
@@ -31,12 +32,12 @@
             console.log(item, index);
         });
         let newLength = fruits.push('Orange');
-        let last = fruits.pop();
-        let first = fruits.shift();
-        let newLength = fruits.unshift('Strawberry');
+        let last2 = fruits.pop();
+        let first2 = fruits.shift();
+        let newLength2 = fruits.unshift('Strawberry');
         fruits.push('Mango');
         let pos = fruits.indexOf('Banana');
-        let removeItem = fruis.splice(pos, 1);
+        let removeItem = fruits.splice(pos, 1);
         let shallowCopy = fruits.slice();
 
         //Boolean Objects and Methods
